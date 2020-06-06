@@ -1,0 +1,41 @@
+﻿@page "/PeliculaDetalle"
+@using BlazorCrud.Model.Modelos
+
+<h3>Peliculas Detalles</h3>
+
+<EditForm Model="@pelicula">
+    <table class="table">
+        <tr>
+            <td>Nombre:</td>
+            <td><input type="text" class="form-control" @bind="pelicula.Nombre" /></td>
+        </tr>
+
+        <tr>
+            <td>Director:</td>
+            <td><input type="text" class="form-control" @bind="pelicula.Director" /></td>
+        </tr>
+
+        <tr>
+            <td>Fecha Extreno:</td>
+            <td><input type="text" class="form-control" @bind="pelicula.FechaExtreno" /></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="button" value="Cancel" @onclick="Cancel"/>
+            </td>
+        </tr>
+    </table>
+
+</EditForm>
+
+@code {
+
+    Peliculas pelicula = new Peliculas();
+
+    protected void Cancel() 
+    { 
+    
+    }
+
+}
