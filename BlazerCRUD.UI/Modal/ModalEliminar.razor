@@ -1,0 +1,49 @@
+﻿@using BlazerCRUD.UI.Pages
+@using BlazerCRUD.UI.Interfaces
+
+@inject IPeliculasService service
+@inject IModalService ModalService
+
+@inject NavigationManager nav
+
+<div role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Desea Eliminar Esta Pelicula Permanentemente?</p>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" @onclick="Eliminar">Eliminar</button>
+                <button type="button" class="btn btn-primary" @onclick="cancel">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+    ListaPeliculas pelicula { get; set; }
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    protected async Task Eliminar()
+    {
+        await service.Eliminar(id);
+        BlazoredModal.Close(ModalResult.Ok<ListaPeliculas>(pelicula));
+        this.StateHasChanged();
+
+    }
+
+    void cancel()
+    {
+        BlazoredModal.Close(ModalResult.Ok<ListaPeliculas>(pelicula));
+    }
+
+}

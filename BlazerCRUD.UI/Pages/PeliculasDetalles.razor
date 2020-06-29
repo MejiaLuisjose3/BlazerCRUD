@@ -1,5 +1,11 @@
 ﻿@page "/PeliculaDetalle"
+@page "/PeliculaDetalle/{id:int}"
+
 @using BlazorCrud.Model.Modelos
+@using BlazerCRUD.UI.Interfaces
+
+@inject IPeliculasService service
+@inject NavigationManager nav
 
 <h3>Peliculas Detalles</h3>
 
@@ -17,12 +23,23 @@
 
         <tr>
             <td>Fecha Extreno:</td>
-            <td><input type="text" class="form-control" @bind="pelicula.FechaExtreno" /></td>
+            <td><input type="date" class="form-control" @bind="pelicula.FechaExtreno" /></td>
         </tr>
 
         <tr>
             <td colspan="2" style="text-align:center">
-                <input type="button" value="Cancel" @onclick="Cancel"/>
+                @if (@id == 0)
+                {
+                   <input type="button" value="Guardar" class="btn btn-primary" @onclick="Saved"/>
+                   <input type="button" value="Cancelar" class="btn btn-secondary" @onclick="Cancel"/>
+
+                }
+                else 
+                {
+                   <input type="button" value="Editar" class="btn btn-primary" @onclick="Saved"/>
+                   <input type="button" value="Cancelar" class="btn btn-secondary" @onclick="Cancel"/>
+                
+                }
             </td>
         </tr>
     </table>
@@ -30,12 +47,28 @@
 </EditForm>
 
 @code {
-
+    [Parameter]
+    public int id { get; set; }
     Peliculas pelicula = new Peliculas();
 
-    protected void Cancel() 
-    { 
-    
+
+    protected async Task Saved()
+    {
+        await service.Agregar(pelicula);
+
+        nav.NavigateTo("/ListaPeliculas");
+    }
+    private void Cancel()
+    {
+        nav.NavigateTo("/ListaPeliculas");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id != 0)
+        {
+            pelicula = await service.Obtener(id);
+        }
     }
 
 }

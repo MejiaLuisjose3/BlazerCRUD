@@ -1,8 +1,15 @@
+using BlazerCRUD.UI.Interfaces;
+using BlazerCRUD.UI.Servicios;
+using BlazorCrud.Data.Context;
+using BlazorCrud.Data.Repositorio.PeliculasRespo;
+using Blazored.Modal;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace BlazerCRUD.UI
 {
@@ -21,6 +28,14 @@ namespace BlazerCRUD.UI
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddBlazoredModal();
+            services.AddScoped<IPeliculasService, PeliculasService > ();
+            services.AddScoped<IPeliculasCrud, PeliculasCrud> ();
+
+            var value = Configuration.GetConnectionString("SqlConnection");
+            
+            services.AddDbContextPool<DataContext>(options =>
+                options.UseSqlServer(value));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

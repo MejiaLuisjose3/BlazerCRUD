@@ -1,0 +1,70 @@
+﻿@page "/ListaPeliculas"
+@using BlazorCrud.Model.Modelos
+@using BlazerCRUD.UI.Interfaces
+@using BlazerCRUD.UI.Modal
+@inject IPeliculasService service
+@inject IModalService Modal
+
+
+<h3>Lista Peliculas</h3>
+
+@if (pelicula == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+
+        <thead class="thead-dark">
+            <tr>
+                <th>Titulo</th>
+                <th>Director</th>
+                <th>Fecha</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var peli in pelicula)
+            {
+                <tr>
+                    <td>@peli.Nombre</td>
+                    <td>@peli.Director</td>
+                    <td>@peli.FechaExtreno</td>
+                    <td><a href="/PeliculaDetalle/@peli.ID" class="btn btn-primary">Editar</a></td>
+                    <td>
+                        <button @onclick="@(() => Eliminar(peli.ID.Value))" class="btn btn-danger">Eliminar </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    void Eliminar(int movieId)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(ModalEliminar.id), movieId);
+
+        Modal.Show <ModalEliminar>("Edit Movie", parameters);
+    }
+
+    IEnumerable<Peliculas> pelicula;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            pelicula = await service.Obtener();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+}

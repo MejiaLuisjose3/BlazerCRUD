@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazerCRUD.UI", "BlazerCRUD.UI\BlazerCRUD.UI.csproj", "{E757BDDA-D2D0-4D72-B1E8-402A75A1A9D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazerCRUD.UI", "BlazerCRUD.UI\BlazerCRUD.UI.csproj", "{E757BDDA-D2D0-4D72-B1E8-402A75A1A9D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCrud.Model", "BlazorCrud.Model\BlazorCrud.Model.csproj", "{35D62A02-F24D-4525-831F-98B288BAFBE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCrud.Model", "BlazorCrud.Model\BlazorCrud.Model.csproj", "{35D62A02-F24D-4525-831F-98B288BAFBE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCrud.Data", "BlazorCrud.Data\BlazorCrud.Data.csproj", "{43B25D0B-3D8A-4249-A1FC-CB85187BC1E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCrud.Data", "BlazorCrud.Data\BlazorCrud.Data.csproj", "{43B25D0B-3D8A-4249-A1FC-CB85187BC1E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
